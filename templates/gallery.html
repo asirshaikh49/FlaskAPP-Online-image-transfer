@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<title>Uploaded Images</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+{% block body %}
+<div style="text-align:center">
+<div style="text-align:center; margin-right:50px;padding-top:40px;display:inline-block"><a href="{{url_for('upload')}}" class="btn" style="background:#000!important">UPLOAD</a></div>
+<div style="text-align:center; margin-right:50px;padding-top:40px;display:inline-block"><a href="{{url_for('logout')}}" class="btn" style="background:#000!important">LOGOUT</a></div>
+ </div>
+<div class="rowu" style="">
+
+    {% for upload in img_names %}             <!--          This is the jinja2 tempate for writing any kind of loops or conditionals          -->
+    {% if ('png' in upload) or ('jpg' in upload) or ('jpeg' in upload) %}
+     <!--          Display only the jpg,png,jpeg file formats          -->
+    <div class="columnu">
+      <img class="preview-image" src="{{url_for('static', filename=upload)}}"}}>
+
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+  <div    style="   position: fixed;left: 0;bottom: 0;width: 100%;background-color:#2c5282;color: white;text-align: center;">
+    @INSPEKTLAB CORPORATION
+  </div>
+{% endblock %}
