@@ -50,20 +50,20 @@ def login_is_required(function):
     return wrapper
 
 
-@app.route("/")
+@app.route("/", methods=['GET','POST'])
 @cross_origin()
 def index():
     #return "Hello World <a href='/login'><button>Login</button></a>"
     return render_template('login.html')
 
-@app.route("/login")
+@app.route("/login",methods=['GET','POST'])
 @cross_origin()
 def login():
     authorization_url, state = flow.authorization_url()
     session["state"] = state
     return redirect(authorization_url)
 
-@app.route("/callback")
+@app.route("/callback",methods=['GET','POST'])
 @cross_origin()
 def callback():
     flow.fetch_token(authorization_response=request.url)
@@ -84,7 +84,7 @@ def callback():
     session["name"] = id_info.get("name")
     return redirect('/Authenticate')
 
-@app.route("/Authenticate")
+@app.route("/Authenticate",methods=['GET','POST'])
 @cross_origin()
 @login_is_required
 def protected_area():
@@ -142,7 +142,7 @@ def gallery():                                       # This method is used to up
 
 #gallery section ends
 
-@app.route("/logout")
+@app.route("/logout",methods=['GET','POST'])
 @cross_origin()
 def logout():
     session.clear()
