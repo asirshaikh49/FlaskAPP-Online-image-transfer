@@ -1,6 +1,6 @@
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-from flask_cors import cross_origin
+from flask_cors import CORS,cross_origin
 from flask import Flask, render_template,request
 from flask_wtf import FlaskForm
 from wtforms import FileField
