@@ -1,5 +1,6 @@
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+from flask_cors import cross_origin
 from flask import Flask, render_template,request
 from flask_wtf import FlaskForm
 from wtforms import FileField
@@ -50,17 +51,20 @@ def login_is_required(function):
 
 
 @app.route("/")
+@cross_origin()
 def index():
     #return "Hello World <a href='/login'><button>Login</button></a>"
     return render_template('login.html')
 
 @app.route("/login")
+@cross_origin()
 def login():
     authorization_url, state = flow.authorization_url()
     session["state"] = state
     return redirect(authorization_url)
 
 @app.route("/callback")
+@cross_origin()
 def callback():
     flow.fetch_token(authorization_response=request.url)
 
@@ -81,6 +85,7 @@ def callback():
     return redirect('/Authenticate')
 
 @app.route("/Authenticate")
+@cross_origin()
 @login_is_required
 def protected_area():
 
@@ -106,6 +111,7 @@ class MyForm(FlaskForm):
 
 
 @app.route('/upload', methods=['GET', 'POST'])
+@cross_origin()
 def upload():
     form = MyForm()
     img_names=[]
@@ -121,6 +127,7 @@ def upload():
 
 #gallery section
 @app.route("/gallery",methods=['GET','POST'])
+@cross_origin()
 def gallery():                                       # This method is used to upload files
     # img_names=os.listdir('./static/imges')
     path = 'static/imges/'
@@ -136,6 +143,7 @@ def gallery():                                       # This method is used to up
 #gallery section ends
 
 @app.route("/logout")
+@cross_origin()
 def logout():
     session.clear()
     return redirect("/")
