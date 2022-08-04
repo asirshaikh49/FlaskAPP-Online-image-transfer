@@ -50,7 +50,7 @@ def login_is_required(function):
     return wrapper
 
 
-@app.route("/", methods=['GET','POST'])
+@app.route("/", methods=['GET'])
 @cross_origin()
 def index():
     #return "Hello World <a href='/login'><button>Login</button></a>"
