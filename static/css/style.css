@@ -42,10 +42,9 @@ transition: transform .2s;
   text-transform: uppercase;
 }
 
-img {
-  border-radius: 20%;
-  height: 60px;
-  width: 60px;
+.columnu img {
+   border-radius:0px !important
+
 }
 
 .table-users {
